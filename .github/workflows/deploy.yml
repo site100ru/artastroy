@@ -19,12 +19,11 @@ jobs:
             cd ~/artastroy.rf/public_html/wp-content/themes/artastroy
             
             #Клинируем репозиторий в папку (только для первой выгрузки!!!)
-            git clone https://github.com/site100ru/artastroy.git .
+            #git clone https://github.com/site100ru/artastroy.git .
             
             #Клинируем репозиторий в папку
-            #git pull
+            git pull
             
             #Если кто то изменил файлы на сервере минуя GitHub, перезаписываем версию на сервере из GitHub
             #git reset --hard HEAD
             #git pull origin main
-            
