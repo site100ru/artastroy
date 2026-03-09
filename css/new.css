@@ -35,6 +35,11 @@
     color: #f7f6f5;
 }
 
+.bg-corporate-alt .section-title,
+.bg-corporate-alt .section-description {
+    color: var(--corporate-color-1);
+}
+
 .section {
     padding-block: 60px;
 }
@@ -955,30 +960,62 @@
     color: #78706a;
 }
 
-.order-right-gradient-section {
-    background-image: url(../img/order-sections.png);
+.order-left-gradient-section {
+    background-image: url(../img/order-sections.jpg);
     background-color: #F5F5F5;
     background-position: center;
     background-size: cover;
 }
 
-@media (max-width: 767.98px) {
-    .order-right-gradient-section {
-        background-image: none;
-        background-color: var(--corporate-color-1);
-        padding-bottom: 0;
-    }
-}
-
-.order-right-gradient-section .btn.btn-corporate-color-1 {
+.order-left-gradient-section .btn.btn-corporate-color-1 {
     max-width: 180px;
     padding-inline: 0;
 }
 
-.order-right-gradient-section .btn.btn-corporate-color-1:hover {
-    color: var(--corporate-color-2);
-    background-color: transparent;
-    border-color: var(--corporate-color-2);
+.order-left-gradient-section .order-left-gradient-content {
+    justify-items: end;
+    text-align: end;
+}
+
+.order-left-gradient-section .order-left-gradient-content form .row {
+    justify-content: end;
+}
+
+.order-left-gradient-section .order-form-label {
+    color: var(--corporate-color-1);
+}
+
+.order-left-gradient-section .order-form-input {
+    border: 1px solid var(--corporate-color-1);
+}
+
+.order-left-gradient-section .order-form-input:focus {
+    border-color: var(--corporate-color-1-hover);
+}
+
+
+@media (max-width: 767.98px) {
+    .order-left-gradient-section {
+        background-image: none;
+        background-color: #FFEB00;
+        padding-bottom: 0;
+    }
+
+    .order-left-gradient-section .order-left-gradient-content {
+        justify-items: start;
+    }
+
+    .order-left-gradient-section .order-section-desc {
+        text-align: start;
+    }
+
+    .order-left-gradient-section .order-left-gradient-content form .row {
+        justify-content: start;
+    }
+
+    .order-left-gradient-section .btn.btn-corporate-color-1 {
+        max-width: 100%;
+    }   
 }
 
 .order-form-label {

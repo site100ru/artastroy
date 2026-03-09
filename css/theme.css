@@ -110,13 +110,32 @@ small {
     color: #54493f;
     background-color: transparent;
     border-color: #54493f;
-    ;
 }
 
 .btn-corporate-color-1:focus {
     --bs-btn-hover-color: #54493f;
     --bs-btn-hover-bg: transparent;
     --bs-btn-hover-border-color: #54493f;
+}
+
+.btn-corporate-color-2 {
+    color: #FFFFFF;
+    background-color: var(--corporate-color-1);
+    border-color: var(--corporate-color-1);
+    border-radius: 5px;
+}
+
+.btn-corporate-color-2:hover,
+.btn-corporate-color-2:active {
+    color: #FFFFFF;
+    background-color: var(--corporate-color-hover);
+    border-color: var(--corporate-color-hover);
+}
+
+.btn-corporate-color-2:focus {
+    --bs-btn-hover-color: #FFFFFF;
+    --bs-btn-hover-bg: var(--corporate-color-hover);
+    --bs-btn-hover-border-color: var(--corporate-color-hover);
 }
 
 .btn-corporate-color-outline-1 {
@@ -211,6 +230,15 @@ small {
 
 .ico-button:hover {
     opacity: 100%;
+}
+
+.ico-button-alt {
+    opacity: 100%;
+    transition: .25s;
+}
+
+.ico-button-alt:hover {
+    opacity: 75%;
 }
 
 #navbarSupportedContent1 {
