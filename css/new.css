@@ -1018,6 +1018,12 @@
     }   
 }
 
+@media (max-width: 360.98px) {
+    .order-left-gradient-section .btn.btn-corporate-color-1 {
+        font-size: 14px;
+    }   
+}
+
 .order-form-label {
     font-family: var(--font-family);
     font-weight: 400;
