@@ -329,6 +329,13 @@ small {
 .home-section_main-mini {
     min-height: 340px;
     background-image: url(../img/home-section-background-min.jpg);
+    background-position: center;
+}
+
+@media (max-width: 768px) {
+    .home-section_main-mini {
+        background-position: left;
+    }
 }
 
 .home-section_main-mini .home-section-title {
