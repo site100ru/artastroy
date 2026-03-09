@@ -1,0 +1,29 @@
+name: Deploy артастрой.рф
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Connect to server
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.ARTASTROY_HOST }}
+          username: ${{ secrets.ARTASTROY_USER }}
+          key: ${{ secrets.ARTASTROY_KEY }}
+          script: |
+            #Переключаемся в нужную папку
+            cd ~/artastroy.rf/public_html/wp-content/themes/artastroy
+            
+            #Клинируем репозиторий в папку (только для первой выгрузки!!!)
+            #git clone https://github.com/site100ru/artastroy.git .
+            
+            #Клинируем репозиторий в папку
+            git pull
+            
+            #Если кто то изменил файлы на сервере минуя GitHub, перезаписываем версию на сервере из GitHub
+            #git reset --hard HEAD
+            #git pull origin main

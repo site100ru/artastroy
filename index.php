@@ -1,7 +1,7 @@
 <?php
 /**
- * Главная страница
- * Файл: index.php
+ * Template Name: Главная
+ * Template Post Type: page
  */
 
 get_header();
