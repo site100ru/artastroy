@@ -328,6 +328,7 @@ small {
 
 .home-section_main-mini {
     min-height: 340px;
+    background-image: url(../img/home-section-background-min.jpg);
 }
 
 .home-section_main-mini .home-section-title {
