@@ -332,7 +332,7 @@ small {
     background-position: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .home-section_main-mini {
         background-position: left;
     }
