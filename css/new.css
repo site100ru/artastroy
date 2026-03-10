@@ -942,6 +942,10 @@
     transform: scale(1.05);
 }
 
+.partner-logo-link {
+    transition: transform 0.3s ease;
+}
+
 .review-description,
 .review-description-link {
     font-family: var(--font-family);
@@ -968,7 +972,6 @@
 }
 
 .order-left-gradient-section .btn.btn-corporate-color-1 {
-    max-width: 180px;
     padding-inline: 0;
 }
 

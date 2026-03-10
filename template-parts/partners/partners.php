@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Секция: Наши партнеры
  *
@@ -19,31 +20,21 @@ $tpl = get_template_directory_uri();
             </div>
         </div>
 
-        <div class="row align-items-md-center justify-content-between partners-row gap-3 align-items-center">
-            <div class="col-auto partners-col">
-                <a href="#" class="partner-logo-link">
-                    <img src="<?php echo esc_url($tpl); ?>/img/partners/partner-1.svg" alt="SGS" class="partner-logo">
-                </a>
+        <div class="row align-items-center justify-content-md-center justify-content-md-between partners-row gy-4">
+            <div class="col-6 col-md-auto d-flex justify-content-center partners-col">
+                <img src="<?php echo esc_url($tpl); ?>/img/partners/partner-1.svg" alt="SGS" class="partner-logo-link partner-logo img-fluid">
             </div>
-            <div class="col-auto partners-col">
-                <a href="#" class="partner-logo-link">
-                    <img src="<?php echo esc_url($tpl); ?>/img/partners/partner-2.svg" alt="New Mix — Сухие строительные смеси" class="partner-logo">
-                </a>
+            <div class="col-6 col-md-auto d-flex justify-content-center partners-col">
+                <img src="<?php echo esc_url($tpl); ?>/img/partners/partner-2.svg" alt="New Mix — Сухие строительные смеси" class="partner-logo-link partner-logo img-fluid">
             </div>
-            <div class="col-auto partners-col">
-                <a href="#" class="partner-logo-link">
-                    <img src="<?php echo esc_url($tpl); ?>/img/partners/partner-3.svg" alt="Vetonit" class="partner-logo">
-                </a>
+            <div class="col-6 col-md-auto d-flex justify-content-center partners-col">
+                <img src="<?php echo esc_url($tpl); ?>/img/partners/partner-3.svg" alt="Vetonit" class="partner-logo-link partner-logo img-fluid">
             </div>
-            <div class="col-auto partners-col">
-                <a href="#" class="partner-logo-link">
-                    <img src="<?php echo esc_url($tpl); ?>/img/partners/partner-4.svg" alt="ТИЗОЛ" class="partner-logo">
-                </a>
+            <div class="col-6 col-md-auto d-flex justify-content-center partners-col">
+                <img src="<?php echo esc_url($tpl); ?>/img/partners/partner-4.svg" alt="ТИЗОЛ" class="partner-logo-link partner-logo img-fluid">
             </div>
-            <div class="col-auto partners-col">
-                <a href="#" class="partner-logo-link">
-                    <img src="<?php echo esc_url($tpl); ?>/img/partners/partner-5.svg" alt="ISOROC" class="partner-logo">
-                </a>
+            <div class="col-6 col-md-auto d-flex justify-content-center partners-col">
+                <img src="<?php echo esc_url($tpl); ?>/img/partners/partner-5.svg" alt="ISOROC" class="partner-logo-link partner-logo img-fluid">
             </div>
         </div>
     </div>
