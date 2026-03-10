@@ -47,7 +47,9 @@ function mytheme_ajax_catalog_filter() {
             'taxonomy' => $taxonomy,
             'field'    => 'slug',
             'terms'    => $terms,
-            'operator' => 'IN',
+            // Если выбрано несколько значений одного атрибута — товар должен иметь ВСЕ из них (И).
+            // Если выбрано одно значение — используем IN (результат тот же, но запрос эффективнее).
+            'operator' => count($terms) > 1 ? 'AND' : 'IN',
         ];
     }
 
