@@ -758,12 +758,16 @@
 #im-in-footer p,
 #im-in-footer a,
 #im-in-footer span {
-    font-family: var(--font-family);
+    font-family: var(--second-family);
     font-weight: 300;
     font-size: 14px;
     color: #B2A9A1;
     transition: all 0.3s ease;
     text-decoration: none;
+}
+
+.policy-in-footer {
+    line-height: 0.8;
 }
 
 #im-in-footer a:hover,
@@ -947,8 +951,8 @@
 }
 
 .review-description,
-.review-description-link {
-    font-family: var(--font-family);
+.review-description-link { 
+    font-family: var(--second-family);
     font-weight: 300;
     font-size: 18px;
     line-height: 125%;
@@ -1133,7 +1137,7 @@
 }
 
 .license-card__title {
-    font-family: var(--font-family);
+    font-family: var(--second-family);
     font-weight: 400;
     font-size: 14px;
     color: #78706a;
@@ -1661,7 +1665,7 @@
 
 /* Placeholder */
 .search-block .dgwt-wcas-search-input::placeholder {
-    font-family: var(--font-family) !important;
+    font-family: var(--second-family) !important;
     font-weight: 300 !important;
     font-size: 18px !important;
     color: #b2a9a1 !important;
