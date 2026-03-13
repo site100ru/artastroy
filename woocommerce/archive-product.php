@@ -102,7 +102,7 @@ get_template_part('template-parts/hero/hero-mini', null, [
                     ]);
                     ?>
 
-                    <!-- Виджет: Категории товаров (корневые) -->
+                    <!-- Виджет: Категории товаров -->
                     <div class="catalog-widget">
                         <h3 class="catalog-widget__title">Категории товаров</h3>
                         <ul class="catalog-categories">
@@ -112,35 +112,37 @@ get_template_part('template-parts/hero/hero-mini', null, [
                                     $cat->term_id === (int)($current_cat->parent ?? 0) ||
                                     term_is_ancestor_of($cat->term_id, $current_cat_id, 'product_cat')
                                 );
+
+                                $sub_cats = get_terms([
+                                    'taxonomy'   => 'product_cat',
+                                    'hide_empty' => true,
+                                    'parent'     => $cat->term_id,
+                                    'orderby'    => 'menu_order',
+                                ]);
                             ?>
                                 <li>
                                     <a href="<?php echo esc_url(get_term_link($cat)); ?>"
                                         class="<?php echo $is_active ? 'active' : ''; ?>">
                                         <?php echo esc_html($cat->name); ?>
                                     </a>
+
+                                    <?php if (!empty($sub_cats) && !is_wp_error($sub_cats)) : ?>
+                                        <ul class="catalog-categories catalog-categories--sub">
+                                            <?php foreach ($sub_cats as $sub) : ?>
+                                                <li>
+                                                    <a href="<?php echo esc_url(get_term_link($sub)); ?>"
+                                                        class="<?php echo ($sub->term_id === $current_cat_id) ? 'active' : ''; ?>">
+                                                        <?php echo esc_html($sub->name); ?>
+                                                    </a>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    <?php endif; ?>
+
                                 </li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
-
-                    <?php if (!empty($show_cats)) : ?>
-                        <!-- Виджет: Подкатегории -->
-                        <div class="catalog-widget">
-                            <h3 class="catalog-widget__title">
-                                <?php echo $parent_cat ? esc_html($parent_cat->name) : 'Разделы'; ?>
-                            </h3>
-                            <ul class="catalog-categories">
-                                <?php foreach ($show_cats as $sub) : ?>
-                                    <li>
-                                        <a href="<?php echo esc_url(get_term_link($sub)); ?>"
-                                            class="<?php echo ($sub->term_id === $current_cat_id) ? 'active' : ''; ?>">
-                                            <?php echo esc_html($sub->name); ?>
-                                        </a>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    <?php endif; ?>
 
                     <?php
                     /**
