@@ -1264,7 +1264,7 @@
 }
 
 .catalog-categories a {
-    font-family: var(--font-family);
+    font-family: var(--second-family);
     font-weight: 500;
     font-size: 14px;
     line-height: 1.25;
