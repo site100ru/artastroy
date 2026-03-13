@@ -23,9 +23,9 @@
 $title       = $args['title']       ?? 'Каталог категорий товаров';
 $subtitle    = $args['subtitle']    ?? 'Широкий выбор строительных материалов для профессионального использования';
 $parent      = $args['parent']      ?? 0;
-$number      = $args['number']      ?? 6;
+$number      = $args['number']      ?? 0;
 $orderby     = $args['orderby']     ?? 'menu_order';
-$hide_empty  = $args['hide_empty']  ?? false;
+$hide_empty  = $args['hide_empty']  ?? true;
 $show_button = $args['show_button'] ?? true;
 $button_text = $args['button_text'] ?? 'Смотреть все товары';
 $button_url  = $args['button_url']  ?? get_permalink(wc_get_page_id('shop'));
