@@ -25,9 +25,9 @@ function mytheme_ajax_catalog_filter() {
 
     $paged    = max(1, intval($_POST['paged']    ?? 1));
     $category = sanitize_text_field($_POST['category'] ?? '');
-    $orderby  = sanitize_text_field($_POST['orderby']  ?? 'menu_order');
-    $order    = in_array(strtoupper($_POST['order'] ?? 'ASC'), ['ASC', 'DESC'])
-                    ? strtoupper($_POST['order']) : 'ASC';
+    $orderby = sanitize_text_field($_POST['orderby'] ?? 'menu_order date');
+    $order   = in_array(strtoupper($_POST['order'] ?? 'ASC'), ['ASC', 'DESC'])
+               ? strtoupper($_POST['order']) : 'ASC';
 
     // ── Собираем tax_query из атрибутов ──────────────────────────────
     // Ключи вида: filter_pa_brand[], filter_pa_insulation-type[] и т.д.
@@ -57,7 +57,7 @@ function mytheme_ajax_catalog_filter() {
     $args = [
         'post_type'           => 'product',
         'post_status'         => 'publish',
-        'posts_per_page'      => get_option('posts_per_page', 6),
+        'posts_per_page'      => get_option('posts_per_page', 18),
         'paged'               => $paged,
         'orderby'             => $orderby,
         'order'               => $order,
