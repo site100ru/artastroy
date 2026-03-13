@@ -1259,6 +1259,10 @@
     border-bottom: none;
 }
 
+.catalog-categories .catalog-categories--sub a {
+    padding: 4px 0;
+}
+
 .catalog-categories a {
     font-family: var(--second-family);
     font-weight: 500;
