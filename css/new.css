@@ -731,7 +731,7 @@
 
 .footer-contacts.contacts-section #contacts-menu-2 .nav-link {
     font-family: var(--second-family);
-    font-weight: 400;
+    font-weight: 500;
     font-size: 14px;
     line-height: 1.25;
     text-transform: uppercase;
@@ -1230,8 +1230,8 @@
     margin-bottom: 0;
 }
 
-.catalog-widget__title {
-    font-family: var(--font-family);
+.catalog-widget__title { 
+    font-family: var(--second-family);
     font-weight: 700;
     font-size: 14px;
     color: #54493f;
@@ -1279,7 +1279,7 @@
 .catalog-categories a:hover,
 .catalog-categories a.active {
     font-weight: 500;
-    color: #78706a;
+    color: var(--corporate-color-hover);
 }
 
 /* Фильтр-чекбоксы */
