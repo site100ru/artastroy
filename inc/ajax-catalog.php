@@ -57,7 +57,7 @@ function mytheme_ajax_catalog_filter() {
     $args = [
         'post_type'           => 'product',
         'post_status'         => 'publish',
-        'posts_per_page'      => get_option('posts_per_page', 18),
+        'posts_per_page'      => apply_filters('loop_shop_per_page', get_option('posts_per_page', 18)),
         'paged'               => $paged,
         'orderby'             => $orderby,
         'order'               => $order,

@@ -1349,7 +1349,7 @@ function mytheme_search_only_products($query)
     if (!is_admin() && $query->is_main_query() && $query->is_search()) {
         $query->set('post_type', ['product']);
         $query->set('post_status', 'publish');
-        $query->set('posts_per_page', apply_filters('loop_shop_per_page', 12));
+        $query->set('posts_per_page', apply_filters('loop_shop_per_page', 18));
     }
 }
 
@@ -1423,5 +1423,5 @@ remove_action('woocommerce_single_product_summary', 'woocommerce_template_single
 
 // Количество товаров в архиве WooCommerce
 add_filter('loop_shop_per_page', function() {
-    return 6;
+    return 18;
 }, 20);
