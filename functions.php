@@ -1387,21 +1387,6 @@ function enqueue_product_filters_scripts()
         // Подключаем jQuery если не подключен
         wp_enqueue_script('jquery');
 
-        // Подключаем наш JS файл
-        wp_enqueue_script(
-            'product-filters',
-            get_template_directory_uri() . '/js/product-filters.js',
-            array('jquery'),
-            '1.0.0',
-            true
-        );
-
-        // Передаем AJAX URL в JavaScript
-        wp_localize_script('product-filters', 'wc_ajax_params', array(
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce'    => wp_create_nonce('product_filter_nonce')
-        ));
-
         wp_enqueue_script('catalog-ajax', get_template_directory_uri() . '/js/catalog-ajax.js', ['jquery'], '1.0.0', true);
         wp_localize_script('catalog-ajax', 'catalogAjax', [
             'ajax_url' => admin_url('admin-ajax.php'),
