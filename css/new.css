@@ -1248,7 +1248,6 @@
 
 .catalog-categories--sub {
     padding-left: 14px;
-    margin-top: 4px;
 }
 
 .catalog-categories li {
@@ -1260,14 +1259,14 @@
 }
 
 .catalog-categories .catalog-categories--sub a {
-    padding: 4px 0;
+    padding: 8px 0;
 }
 
 .catalog-categories a {
     font-family: var(--second-family);
     font-weight: 500;
     font-size: 14px;
-    line-height: 1.25;
+    line-height: 1;
     text-transform: uppercase;
     color: #78706a;
     text-decoration: none;
