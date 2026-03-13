@@ -1207,11 +1207,11 @@
 }
 
 .product-content__specs {
-    font-family: var(--third-family);
-    font-weight: 500;
+    font-family: var(--second-family);
+    font-weight: 400;
     font-size: 20px;
-    line-height: 125%;
-    color: #54493f;
+    line-height: 1;
+    color: #54493F;
 }
 
 .product-spec {
