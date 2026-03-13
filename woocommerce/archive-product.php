@@ -232,6 +232,22 @@ get_template_part('template-parts/hero/hero-mini', null, [
             </div>
             <!-- /САЙДБАР -->
 
+            <?php
+// === ДИАГНОСТИКА (удалить после проверки) ===
+echo '<div style="background:#fff3cd;padding:10px;margin:10px 0;font-size:12px;">';
+echo '<b>current_cat_id:</b> ' . $current_cat_id . '<br>';
+echo '<b>product_ids count:</b> ' . count($product_ids) . '<br>';
+echo '<b>used_taxonomies:</b> ' . implode(', ', array_keys($used_taxonomies)) . '<br>';
+
+$all_attrs = wc_get_attribute_taxonomies();
+echo '<b>wc_get_attribute_taxonomies count:</b> ' . count($all_attrs) . '<br>';
+foreach ($all_attrs as $a) {
+    echo '— ' . $a->attribute_name . ' | public: ' . $a->attribute_public . '<br>';
+}
+echo '</div>';
+// === КОНЕЦ ДИАГНОСТИКИ ===
+?>
+
             <!-- ===== ТОВАРЫ ===== -->
             <div class="col-lg-9">
                 <div id="catalog-products-container"
