@@ -1208,9 +1208,9 @@
 
 .product-content__specs {
     font-family: var(--second-family);
-    font-weight: 400;
+    font-weight: 500;
     font-size: 20px;
-    line-height: 1;
+    line-height: normal;
     color: #54493F;
 }
 

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * WooCommerce: Карточка товара в архиве
- * Файл: woocommerce/content-product-card.php
- *
- * Используется в archive-product.php через wc_get_template_part('content', 'product-card')
- */
-
 defined('ABSPATH') || exit;
 
 global $product;
@@ -16,6 +9,19 @@ $product_url   = get_permalink($product->get_id());
 $product_title = get_the_title();
 $thumbnail_url = get_the_post_thumbnail_url($product->get_id(), 'woocommerce_thumbnail') ?: wc_placeholder_img_src();
 $price_html    = $product->get_price_html();
+
+// Единица измерения — атрибут pa_edinica / pa_unit
+$unit_suffix = '';
+foreach ($product->get_attributes() as $attr) {
+    if (in_array($attr->get_name(), ['pa_edinica', 'pa_unit'])) {
+        $terms = $attr->get_terms();
+        $unit_label = $terms
+            ? $terms[0]->name
+            : ($attr->get_options()[0] ?? '');
+        if ($unit_label) $unit_suffix = '/' . $unit_label;
+        break;
+    }
+}
 ?>
 
 <div class="col-md-6 col-xl-4">
@@ -35,6 +41,9 @@ $price_html    = $product->get_price_html();
             <?php if ($price_html) : ?>
                 <div class="catalog-card-item__price">
                     <?php echo $price_html; ?>
+                    <?php if ($unit_suffix) : ?>
+                        <span class="catalog-card-item__unit"><?php echo esc_html($unit_suffix); ?></span>
+                    <?php endif; ?>
                 </div>
             <?php endif; ?>
 

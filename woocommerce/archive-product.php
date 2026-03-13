@@ -66,14 +66,11 @@ get_template_part('template-parts/hero/hero-mini', null, [
                     $current_cat_id = $current_cat ? $current_cat->term_id : 0;
 
                     // ── Подкатегории для сайдбара ─────────────────────────────────
-                    // Если мы в корневой категории — показываем её подкатегории.
-                    // Если в подкатегории — показываем сестёр (детей родителя).
                     $parent_cat = null;
                     $show_cats  = [];
 
                     if ($current_cat) {
                         if ((int)$current_cat->parent === 0) {
-                            // Корневая: подкатегории
                             $parent_cat = $current_cat;
                             $show_cats  = get_terms([
                                 'taxonomy'   => 'product_cat',
@@ -82,7 +79,6 @@ get_template_part('template-parts/hero/hero-mini', null, [
                                 'orderby'    => 'menu_order',
                             ]);
                         } else {
-                            // Подкатегория: сёстры
                             $parent_cat = get_term($current_cat->parent, 'product_cat');
                             $show_cats  = get_terms([
                                 'taxonomy'   => 'product_cat',
