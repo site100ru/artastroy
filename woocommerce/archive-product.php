@@ -308,12 +308,12 @@ get_template_part('template-parts/hero/hero-mini', null, [
 
 
 <script>
-    document.querySelectorAll('[data-bs-target="#orderModal"]').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var title = this.getAttribute('data-product-title');
-            document.getElementById('modalProductTitle').textContent = title || '';
-            document.getElementById('hiddenProductTitle').value = title || '';
-        });
+    document.addEventListener('click', function(e) {
+        var btn = e.target.closest('[data-bs-target="#orderModal"]');
+        if (!btn) return;
+        var title = btn.getAttribute('data-product-title');
+        document.getElementById('modalProductTitle').textContent = title || '';
+        document.getElementById('hiddenProductTitle').value = title || '';
     });
 </script>
 

@@ -22,7 +22,9 @@ function galleryOn(galleryId) {
 
 // Функция закрытия галереи
 function closeGallery() {
-    document.getElementById('galleryWrapper').style.display = 'none';
+    var wrapper = document.getElementById('galleryWrapper');
+    if (!wrapper) return;
+    wrapper.style.display = 'none';
 }
 
 // Закрытие по Escape
