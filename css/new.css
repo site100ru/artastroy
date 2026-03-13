@@ -1236,7 +1236,7 @@
     font-size: 14px;
     color: #54493f;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 /* Список категорий */
@@ -1248,7 +1248,7 @@
 
 .catalog-categories--sub {
     padding-left: 14px;
-    margin-top: 6px;
+    margin-top: 4px;
 }
 
 .catalog-categories li {
