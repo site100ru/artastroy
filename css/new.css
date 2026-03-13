@@ -33,11 +33,13 @@
 .bg-corporate .section-title,
 .bg-corporate .section-description {
     color: #f7f6f5;
+    font-weight: 400;
 }
 
 .bg-corporate-alt .section-title,
 .bg-corporate-alt .section-description {
     color: var(--corporate-color-1);
+    font-weight: 400;
 }
 
 .section {
@@ -678,7 +680,7 @@
 }
 
 #menu-main-menu.navbar-nav .nav-link {
-    font-family: var(--font-family);
+    font-family: var(--second-family);
     font-weight: 500;
     font-size: 14px;
     text-transform: uppercase;
@@ -951,7 +953,7 @@
 }
 
 .review-description,
-.review-description-link { 
+.review-description-link {
     font-family: var(--second-family);
     font-weight: 300;
     font-size: 18px;
@@ -1014,6 +1016,7 @@
 
     .order-left-gradient-section .order-section-desc {
         text-align: start;
+        font-weight: 400;
     }
 
     .order-left-gradient-section .order-left-gradient-content form .row {
@@ -1022,13 +1025,13 @@
 
     .order-left-gradient-section .btn.btn-corporate-color-1 {
         max-width: 100%;
-    }   
+    }
 }
 
 @media (max-width: 360.98px) {
     .order-left-gradient-section .btn.btn-corporate-color-1 {
         font-size: 12px;
-    }   
+    }
 }
 
 .order-form-label {
@@ -1241,6 +1244,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    margin-left: 16px;
 }
 
 .catalog-categories li {
@@ -1611,7 +1615,7 @@
 .search-block .dgwt-wcas-sf-wrapp {
     border: 1px solid #e8e4e0 !important;
     border-radius: 5px !important;
-    background: #fff !important;
+    background: #F7F6F5 !important;
     display: flex !important;
     align-items: center !important;
     transition: border-color 0.2s ease !important;
@@ -1637,7 +1641,7 @@
 /* Поле ввода */
 .search-block .dgwt-wcas-search-input,
 .search-block input[type="search"].dgwt-wcas-search-input {
-    color: var(--dark-color) !important;
+    color: #969696 !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
@@ -1683,5 +1687,20 @@
 /* ===== END FiboSearch в Hero секции ===== */
 
 .woocommerce-Price-amount.amount {
+    font-weight: 700;
+}
+
+.dgwt-wcas-style-pirx .dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input {
+    font-family: inherit !important;
+}
+
+.product-short-desc {
+    font-family: var(--third-family);
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--corporate-color-1);
+}
+
+.product-short-desc strong {
     font-weight: 700;
 }
