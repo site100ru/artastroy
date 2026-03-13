@@ -1359,7 +1359,6 @@
 .catalog-card-item__img-wrap {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 1 / 1;
 }
 
 .catalog-card-item__img-wrap img {
