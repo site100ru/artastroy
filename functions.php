@@ -64,9 +64,12 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
         $attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
         $attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
 
+        $shop_id = function_exists('wc_get_page_id') ? wc_get_page_id('shop') : 0;
+        $is_shop_item = ($shop_id && (int)$item->object_id === $shop_id && is_woocommerce());
+
         $active_class = ($item->current 
             || $item->current_item_ancestor 
-            || in_array('current-menu-item', $item->classes, true)
+            || $is_shop_item
             || in_array('current_page_parent', $item->classes, true) 
             || in_array('current-post-ancestor', $item->classes, true)) ? 'active' : '';
 
