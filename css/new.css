@@ -22,6 +22,10 @@
     margin-bottom: 0 !important;
 }
 
+.woocommerce-breadcrumb a:hover {
+    color: var(--corporate-color-hover);
+}
+
 .bg-alt-light {
     background: #f7f6f5;
 }
