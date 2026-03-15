@@ -1054,14 +1054,6 @@ footer {
     margin-bottom: 4px;
 }
 
-.woocommerce-breadcrumb a {
-    color: var(--dark-color);
-}
-
-.woocommerce-breadcrumb a:hover {
-    color: var(--corporate-color-1);
-}
-
 .page-item .page-link {
     --bs-pagination-border-radius: 0;
     --bs-pagination-active-bg: var(--corporate-color-1);

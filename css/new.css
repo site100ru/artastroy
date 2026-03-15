@@ -16,7 +16,7 @@
     font-family: var(--third-family);
     font-weight: 300;
     font-size: 18px !important;
-    color: #78706a !important;
+    color: #78706a;
     line-height: 1.25;
     text-decoration: none;
     margin-bottom: 0 !important;
