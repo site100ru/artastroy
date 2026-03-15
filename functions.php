@@ -64,7 +64,12 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
         $attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
         $attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
 
-        $active_class = ($item->current || $item->current_item_ancestor || in_array("current_page_parent", $item->classes, true) || in_array("current-post-ancestor", $item->classes, true)) ? 'active' : '';
+        $active_class = ($item->current 
+            || $item->current_item_ancestor 
+            || in_array('current-menu-item', $item->classes, true)
+            || in_array('current_page_parent', $item->classes, true) 
+            || in_array('current-post-ancestor', $item->classes, true)) ? 'active' : '';
+
         $nav_link_class = ($depth > 0) ? 'dropdown-item header-link ' : 'nav-link header-link ';
         $attributes .= ($args->walker->has_children) ? ' class="' . $nav_link_class . $active_class . ' dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : ' class="' . $nav_link_class . $active_class . '"';
 
@@ -99,26 +104,6 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
     }
 }
 /* End Bootstrap 5 wp_nav_menu walker */
-
-add_filter('nav_menu_objects', 'mytheme_active_shop_menu_item', 10, 2);
-function mytheme_active_shop_menu_item($items, $args)
-{
-    if (!is_woocommerce()) {
-        return $items;
-    }
-
-    $shop_id = wc_get_page_id('shop');
-
-    foreach ($items as $item) {
-        if ((int)$item->object_id === $shop_id) {
-            $item->classes[]  = 'current-menu-item';
-            $item->current    = true;
-        }
-    }
-
-    return $items;
-}
-
 
 /* Register a new menu */
 add_action('after_setup_theme', function () {
