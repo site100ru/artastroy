@@ -100,6 +100,25 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
 }
 /* End Bootstrap 5 wp_nav_menu walker */
 
+add_filter('nav_menu_objects', 'mytheme_active_shop_menu_item', 10, 2);
+function mytheme_active_shop_menu_item($items, $args)
+{
+    if (!is_woocommerce()) {
+        return $items;
+    }
+
+    $shop_id = wc_get_page_id('shop');
+
+    foreach ($items as $item) {
+        if ((int)$item->object_id === $shop_id) {
+            $item->classes[]  = 'current-menu-item';
+            $item->current    = true;
+        }
+    }
+
+    return $items;
+}
+
 
 /* Register a new menu */
 add_action('after_setup_theme', function () {
