@@ -163,56 +163,47 @@ function change_existing_currency_symbol($currency_symbol, $currency)
 
 
 /*** BREADCRUMBS ***/
-/* Change several of the breadcrumb defaults */
+
+/* Разделитель, обёртка и убираем дефолтную "Home" */
 add_filter('woocommerce_breadcrumb_defaults', 'jk_woocommerce_breadcrumbs');
 function jk_woocommerce_breadcrumbs()
 {
     return array(
-        'delimiter' => ' / ',
+        'delimiter'   => ' / ',
         'wrap_before' => '<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="/" class="text-decoration-none"><img src="' . get_template_directory_uri() . '/img/ico/home.svg" alt="Домик"></a> / ',
-        'wrap_after' => '</nav>',
-        'before' => '',
-        'after' => '',
-        'home' => _x('Home', 'breadcrumb', 'woocommerce'),
+        'wrap_after'  => '</nav>',
+        'before'      => '',
+        'after'       => '',
+        'home'        => null,
     );
 }
 
-/* Убираем ссылку на главную страницу сайта в хлебных крошках */
-add_filter('woocommerce_breadcrumb_defaults', 'wcc_change_breadcrumb_home_text');
-function wcc_change_breadcrumb_home_text($defaults)
+/* Только поиск и портфолио правим руками — остальное WooCommerce делает сам */
+add_filter('woocommerce_get_breadcrumb', 'mytheme_fix_breadcrumbs', 10, 2);
+function mytheme_fix_breadcrumbs($crumbs, $breadcrumb)
 {
-    $defaults['home'] = null;
-    return $defaults;
-}
-
-/* Добавляем ссылку на главную страницу магазина в хлебных крошках */
-add_filter('woocommerce_get_breadcrumb', function ($crumbs, $Breadcrumb) {
-    if (is_post_type_archive('products') or is_product_taxonomy('product-cat')) {
-        $new_breadcrumb = [
-            _x('Продукция', 'breadcrumb', 'woocommerce'),
-            get_permalink(wc_get_page_id('shop'))
+    if (isset($_GET['s']) && $_GET['s'] !== '') {
+        return [
+            [sprintf('Результат поиска &laquo;%s&raquo;', esc_html(get_search_query())), ''],
         ];
-        array_splice($crumbs, 0, 0, [$new_breadcrumb]);
-    } else if (is_tax('portfolio-cat')) {
-        $new_breadcrumb = [
-            _x('Наши работы', 'breadcrumb', 'woocommerce'),
-            home_url('/portfolio/')
-        ];
-        array_splice($crumbs, 0, 1, [$new_breadcrumb]);
     }
+
+    if (is_tax('portfolio-cat')) {
+        array_splice($crumbs, 0, 1, [[_x('Наши работы', 'breadcrumb', 'woocommerce'), home_url('/portfolio/')]]);
+        return $crumbs;
+    }
+
+    // Добавляем "Каталог" перед остальными крошками если его нет
+    $shop_id = wc_get_page_id('shop');
+    if ($shop_id && $shop_id !== -1 && !is_shop()) {
+        $shop_crumb = [get_the_title($shop_id), get_permalink($shop_id)];
+        // Проверяем что первая крошка — не сам каталог
+        if (empty($crumbs[0][1]) || $crumbs[0][1] !== get_permalink($shop_id)) {
+            array_unshift($crumbs, $shop_crumb);
+        }
+    }
+
     return $crumbs;
-}, 10, 2);
-
-
-/* WC 2.6.4: Изменить любой элемент "хлебных крошек" */
-add_filter('woocommerce_get_breadcrumb', 'my_woocommerce_get_breadcrumb');
-function my_woocommerce_get_breadcrumb($breadcrumb)
-{
-    foreach ($breadcrumb as $key => $crumb) {
-        if ($breadcrumb[$key][0] == 'Наша продукция')
-            $breadcrumb[$key][0] = 'Продукция';
-    }
-    return $breadcrumb;
 }
 /*** END BREADCRUMBS ***/
 
@@ -1363,18 +1354,6 @@ function mytheme_force_search_template($template)
         }
     }
     return $template;
-}
-
-/* На странице поиска убираем "Shop" из хлебных крошек */
-add_filter('woocommerce_get_breadcrumb', 'mytheme_search_breadcrumb');
-function mytheme_search_breadcrumb($breadcrumb)
-{
-    if (!isset($_GET['s'])) {
-        return $breadcrumb;
-    }
-    return [
-        [sprintf('Результат поиска &laquo;%s&raquo;', esc_html(get_search_query())), ''],
-    ];
 }
 
 /*** КОНЕЦ ПОИСКА ***/
