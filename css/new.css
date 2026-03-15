@@ -20,6 +20,7 @@
     line-height: 1.25;
     text-decoration: none;
     margin-bottom: 0 !important;
+    transition: color 0.3s ease;
 }
 
 .woocommerce-breadcrumb a:hover {
