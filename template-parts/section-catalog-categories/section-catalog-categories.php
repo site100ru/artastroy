@@ -48,6 +48,7 @@ if (empty($categories) || is_wp_error($categories)) {
 <section class="section bg-alt-light">
     <div class="container">
 
+        <!-- Заголовок -->
         <div class="row">
             <div class="col text-md-center">
                 <?php if ($title) : ?>
@@ -60,6 +61,7 @@ if (empty($categories) || is_wp_error($categories)) {
             </div>
         </div>
 
+        <!-- Сетка подкатегорий -->
         <div class="row gx-catalog gy-catalog">
             <?php foreach ($categories as $category) :
                 $thumbnail_id  = get_term_meta($category->term_id, 'thumbnail_id', true);
