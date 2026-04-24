@@ -134,3 +134,11 @@ function prilipalo() {
 
 // Вызываем функцию после загрузки DOM
 document.addEventListener('DOMContentLoaded', prilipalo);
+
+
+/* Убираем сообщение об успешной отправки */
+function modalClose() {
+    document.getElementById('background-msg').style.display = 'none';
+    document.getElementById('message').style.display = 'none';
+    document.getElementById('btn-close').style.display = 'none';
+}new.js

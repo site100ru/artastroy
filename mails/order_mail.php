@@ -29,9 +29,6 @@ if ( ! $_POST ) {
 $from_domain = $_SERVER['HTTP_HOST'] ?? parse_url( home_url(), PHP_URL_HOST );
 $subject     = 'Заявка на обратный звонок с сайта ' . $from_domain;
 
-// Основной email
-$main_email = get_theme_mod( 'mytheme_email', '' );
-
 // Дополнительные email из повторителя
 $emails_extra = [];
 $emails_json  = get_theme_mod( 'mytheme_emails_extra_json', '' );
@@ -44,16 +41,8 @@ if ( is_array( $emails_data ) ) {
     }
 }
 
-// Собираем всех получателей
-$recipients = array_filter( array_merge(
-    $main_email ? [ $main_email ] : [],
-    $emails_extra
-) );
-
-if ( empty( $recipients ) ) {
-    // Если в Customizer не указан ни один email — отправить некуда
-    wp_die( 'Ошибка конфигурации: не указан email получателя. Обратитесь к администратору сайта.' );
-}
+// Собираем только дополнительные email из повторителя
+$recipients = array_filter( $emails_extra );
 
 $to_email = implode( ', ', $recipients );
 // ─────────────────────────────────────────────────────────────────
@@ -66,28 +55,25 @@ $referer = wp_get_referer() ?: home_url();
 
 // Проверка обязательного поля
 if ( empty( $phone ) ) {
-    $_SESSION['form_status']  = 'error';
-    $_SESSION['form_message'] = 'Обязательное поле с номером телефона не заполнено! Пожалуйста, повторите попытку.';
+    $_SESSION['win']       = 1;
+    $_SESSION['recaptcha'] = '<p class="text-light"><strong>Ошибка!</strong><br>Обязательное поле с номером телефона не заполнено! Пожалуйста, повторите попытку.</p>';
     wp_safe_redirect( $referer );
     exit;
 }
-
 // ─── Отправка Email ──────────────────────────────────────────────
 $headers  = "MIME-Version: 1.0\r\n";
-$headers .= "From: noreply@{$from_domain}\r\n";
+$from_name = 'артастрой.рф';
+$headers .= "From: =?UTF-8?B?" . base64_encode($from_name) . "?= <noreply@{$from_domain}>\r\n";
 $headers .= "Reply-To: noreply@{$from_domain}\r\n";
 $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-$message  = "<h3>Заявка на обратный звонок</h3>";
-$message .= "<p><strong>Имя:</strong> " . ( $name ?: '—' ) . "</p>";
-$message .= "<p><strong>Телефон:</strong> {$phone}</p>";
-$message .= "<hr><p><small>Отправлено с сайта {$from_domain}</small></p>";
+$message = "Потенциальный клиент с именем <strong>{$name}</strong><br>просит перезвонить на номер <strong>{$phone}</strong>";
 
 wp_mail( $to_email, $subject, $message, $headers );
 
 // ─── Редирект с результатом ──────────────────────────────────────
-$_SESSION['form_status']  = 'success';
-$_SESSION['form_message'] = 'Спасибо за обращение! Мы свяжемся с Вами в течение 10 минут.';
+$_SESSION['win']       = 1;
+$_SESSION['recaptcha'] = '<p class="text-light">Спасибо за обращение в нашу компанию. Мы ответим Вам в&#160;ближайшее время.</p>';
 
 wp_safe_redirect( $referer );
 exit;
