@@ -26,6 +26,7 @@ $extra_phones    = mytheme_get_phones_extra();
 $email           = mytheme_get_email();
 $telegram        = mytheme_get_telegram();
 $whatsapp        = mytheme_get_whatsapp();
+$viber           = mytheme_get_viber();
 $vk              = mytheme_get_vk();
 $address         = mytheme_get_address();
 $job_time        = mytheme_get_job_time();
@@ -158,14 +159,6 @@ foreach ($extra_phones as $p) {
         </ul>
 
         <ul class="nav justify-content-start justify-content-lg-center footer-social">
-          <?php if ($whatsapp) : ?>
-          <li class="nav-item">
-            <a class="nav-link ico-button pe-3" href="<?php echo esc_url($whatsapp); ?>">
-              <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/whatsapp-circle-ico.svg"
-                alt="WhatsApp">
-            </a>
-          </li>
-          <?php endif; ?>
           <?php if ($telegram) : ?>
           <li class="nav-item">
             <a class="nav-link ico-button pe-3" href="<?php echo esc_url($telegram); ?>">
@@ -174,18 +167,32 @@ foreach ($extra_phones as $p) {
             </a>
           </li>
           <?php endif; ?>
+          <?php if ($whatsapp) : ?>
+          <li class="nav-item">
+            <a class="nav-link ico-button pe-3" href="<?php echo esc_url($whatsapp); ?>">
+              <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/whatsapp-circle-ico.svg"
+                alt="WhatsApp">
+            </a>
+          </li>
+          <?php endif; ?>
+          <?php if ($viber) : ?>
+          <li class="nav-item">
+            <a class="nav-link ico-button pe-3" href="<?php echo esc_url($viber); ?>">
+              <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/vider-circle-ico.svg" alt="Viber">
+            </a>
+          </li>
+          <?php endif; ?>
           <?php if ($vk) : ?>
           <li class="nav-item">
-            <a class="nav-link ico-button" href="<?php echo esc_url($vk); ?>">
-              <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/vider-circle-ico.svg"
-                alt="ВКонтакте">
+            <a class="nav-link ico-button pe-3" href="<?php echo esc_url($vk); ?>">
+              <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/vk-icon.svg" alt="ВКонтакте">
             </a>
           </li>
           <?php endif; ?>
           <?php if ($max_link) : ?>
           <li class="nav-item">
             <a class="nav-link ico-button" href="<?php echo esc_url($max_link); ?>">
-              <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/max-circle-ico.svg" alt="MAX">
+              <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/max-icon.svg" alt="MAX">
             </a>
           </li>
           <?php endif; ?>

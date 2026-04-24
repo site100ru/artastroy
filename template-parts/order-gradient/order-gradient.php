@@ -22,6 +22,9 @@ $button_text = $args['button_text'] ?? 'Оставить заявку';
 // Соцсети из Customizer
 $telegram = mytheme_get_telegram();
 $whatsapp = mytheme_get_whatsapp();
+$viber = mytheme_get_viber();
+$vk       = mytheme_get_vk();
+$max      = mytheme_get_max();
 ?>
 
 <!-- ========== ОСТАЛИСЬ ВОПРОСЫ ========== -->
@@ -54,10 +57,11 @@ $whatsapp = mytheme_get_whatsapp();
           </div>
         </form>
 
-        <?php if ($telegram || $whatsapp) : ?>
+        <?php if ($telegram || $whatsapp || $viber || $vk || $max) : ?>
         <div class="row mt-4">
           <div class="col">
             <ul class="nav">
+
               <?php if ($telegram) : ?>
               <li class="nav-item">
                 <a class="nav-link ico-button ico-button-alt p-0 pe-3 pe-md-4" href="<?php echo esc_url($telegram); ?>">
@@ -66,14 +70,42 @@ $whatsapp = mytheme_get_whatsapp();
                 </a>
               </li>
               <?php endif; ?>
+
               <?php if ($whatsapp) : ?>
               <li class="nav-item">
-                <a class="nav-link ico-button ico-button-alt p-0 pe-3 pe-md-0" href="<?php echo esc_url($whatsapp); ?>">
+                <a class="nav-link ico-button ico-button-alt p-0 pe-3 pe-md-4" href="<?php echo esc_url($whatsapp); ?>">
                   <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/wa-icon-dark.svg"
                     alt="WhatsApp">
                 </a>
               </li>
               <?php endif; ?>
+
+              <?php if ($viber) : ?>
+              <li class="nav-item">
+                <a class="nav-link ico-button ico-button-alt p-0 pe-3 pe-md-4" href="<?php echo esc_url($viber); ?>">
+                  <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/vider-icon-dark.svg"
+                    alt="Viber">
+                </a>
+              </li>
+              <?php endif; ?>
+
+              <?php if ($vk) : ?>
+              <li class="nav-item">
+                <a class="nav-link ico-button ico-button-alt p-0 pe-3 pe-md-4" href="<?php echo esc_url($vk); ?>">
+                  <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/vk-icon-dark.svg"
+                    alt="ВКонтакте">
+                </a>
+              </li>
+              <?php endif; ?>
+
+              <?php if ($max) : ?>
+              <li class="nav-item">
+                <a class="nav-link ico-button ico-button-alt p-0" href="<?php echo esc_url($max); ?>">
+                  <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/max-icon-dark.svg" alt="MAX">
+                </a>
+              </li>
+              <?php endif; ?>
+
             </ul>
           </div>
         </div>

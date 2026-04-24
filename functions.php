@@ -498,6 +498,25 @@ function mytheme_customize_register($wp_customize)
         'type' => 'input'
     ));
 
+    /* Viber */
+    $wp_customize->add_section('mytheme_contacts_viber', array(
+        'title' => 'Viber',
+        'panel' => 'contact_panel',
+        'priority' => 38
+    ));
+
+    $wp_customize->add_setting('mytheme_viber', array(
+        'default' => '',
+        'transport' => 'postMessage',
+    ));
+
+    $wp_customize->add_control('mytheme_viber', array(
+        'label' => 'Viber',
+        'description' => 'Укажите ссылку на Viber',
+        'section' => 'mytheme_contacts_viber',
+        'type' => 'input',
+    ));
+
 
     /* Instagram */
     $wp_customize->add_section('mytheme_contacts_instagram', array(
@@ -725,66 +744,72 @@ if (class_exists('WP_Customize_Control')) {
                 $values = array();
             }
 ?>
-            <label>
-                <span class="customize-control-title"><?php echo esc_html($this->label); ?></span>
-                <?php if (!empty($this->description)) : ?>
-                    <span class="description customize-control-description"><?php echo esc_html($this->description); ?></span>
-                <?php endif; ?>
-            </label>
+<label>
+  <span class="customize-control-title"><?php echo esc_html($this->label); ?></span>
+  <?php if (!empty($this->description)) : ?>
+  <span class="description customize-control-description"><?php echo esc_html($this->description); ?></span>
+  <?php endif; ?>
+</label>
 
-            <div class="phone-repeater-list">
-                <?php foreach ($values as $index => $phone) : ?>
-                    <div class="phone-repeater-item" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-                        <input type="text" placeholder="Номер для отображения (напр: 8 (4912) 77-70-98)" value="<?php echo esc_attr($phone['display']); ?>" class="phone-display" style="width: 100%; margin-bottom: 5px;" />
-                        <input type="text" placeholder="Номер для ссылки (напр: 84912777098)" value="<?php echo esc_attr($phone['link']); ?>" class="phone-link" style="width: 100%; margin-bottom: 5px;" />
-                        <button type="button" class="button remove-phone" style="color: #a00;">Удалить</button>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+<div class="phone-repeater-list">
+  <?php foreach ($values as $index => $phone) : ?>
+  <div class="phone-repeater-item"
+    style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+    <input type="text" placeholder="Номер для отображения (напр: 8 (4912) 77-70-98)"
+      value="<?php echo esc_attr($phone['display']); ?>" class="phone-display"
+      style="width: 100%; margin-bottom: 5px;" />
+    <input type="text" placeholder="Номер для ссылки (напр: 84912777098)"
+      value="<?php echo esc_attr($phone['link']); ?>" class="phone-link" style="width: 100%; margin-bottom: 5px;" />
+    <button type="button" class="button remove-phone" style="color: #a00;">Удалить</button>
+  </div>
+  <?php endforeach; ?>
+</div>
 
-            <button type="button" class="button add-phone" style="margin-top: 10px;">+ Добавить телефон</button>
+<button type="button" class="button add-phone" style="margin-top: 10px;">+ Добавить телефон</button>
 
-            <input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr($this->value()); ?>" class="phone-repeater-value" />
+<input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr($this->value()); ?>"
+  class="phone-repeater-value" />
 
-            <script type="text/javascript">
-                jQuery(document).ready(function($) {
-                    var control = $('#customize-control-<?php echo esc_js($this->id); ?>');
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+  var control = $('#customize-control-<?php echo esc_js($this->id); ?>');
 
-                    function updateValue() {
-                        var phones = [];
-                        control.find('.phone-repeater-item').each(function() {
-                            var display = $(this).find('.phone-display').val();
-                            var link = $(this).find('.phone-link').val();
-                            if (display || link) {
-                                phones.push({
-                                    display: display,
-                                    link: link
-                                });
-                            }
-                        });
-                        control.find('.phone-repeater-value').val(JSON.stringify(phones)).trigger('change');
-                    }
+  function updateValue() {
+    var phones = [];
+    control.find('.phone-repeater-item').each(function() {
+      var display = $(this).find('.phone-display').val();
+      var link = $(this).find('.phone-link').val();
+      if (display || link) {
+        phones.push({
+          display: display,
+          link: link
+        });
+      }
+    });
+    control.find('.phone-repeater-value').val(JSON.stringify(phones)).trigger('change');
+  }
 
-                    control.on('click', '.add-phone', function() {
-                        var template = '<div class="phone-repeater-item" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">' +
-                            '<input type="text" placeholder="Номер для отображения (напр: 8 (4912) 77-70-98)" class="phone-display" style="width: 100%; margin-bottom: 5px;" />' +
-                            '<input type="text" placeholder="Номер для ссылки (напр: 84912777098)" class="phone-link" style="width: 100%; margin-bottom: 5px;" />' +
-                            '<button type="button" class="button remove-phone" style="color: #a00;">Удалить</button>' +
-                            '</div>';
-                        control.find('.phone-repeater-list').append(template);
-                    });
+  control.on('click', '.add-phone', function() {
+    var template =
+      '<div class="phone-repeater-item" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">' +
+      '<input type="text" placeholder="Номер для отображения (напр: 8 (4912) 77-70-98)" class="phone-display" style="width: 100%; margin-bottom: 5px;" />' +
+      '<input type="text" placeholder="Номер для ссылки (напр: 84912777098)" class="phone-link" style="width: 100%; margin-bottom: 5px;" />' +
+      '<button type="button" class="button remove-phone" style="color: #a00;">Удалить</button>' +
+      '</div>';
+    control.find('.phone-repeater-list').append(template);
+  });
 
-                    control.on('click', '.remove-phone', function() {
-                        $(this).closest('.phone-repeater-item').remove();
-                        updateValue();
-                    });
+  control.on('click', '.remove-phone', function() {
+    $(this).closest('.phone-repeater-item').remove();
+    updateValue();
+  });
 
-                    control.on('input', '.phone-display, .phone-link', function() {
-                        updateValue();
-                    });
-                });
-            </script>
-        <?php
+  control.on('input', '.phone-display, .phone-link', function() {
+    updateValue();
+  });
+});
+</script>
+<?php
         }
     }
 
@@ -803,62 +828,66 @@ if (class_exists('WP_Customize_Control')) {
                 $values = array();
             }
         ?>
-            <label>
-                <span class="customize-control-title"><?php echo esc_html($this->label); ?></span>
-                <?php if (!empty($this->description)) : ?>
-                    <span class="description customize-control-description"><?php echo esc_html($this->description); ?></span>
-                <?php endif; ?>
-            </label>
+<label>
+  <span class="customize-control-title"><?php echo esc_html($this->label); ?></span>
+  <?php if (!empty($this->description)) : ?>
+  <span class="description customize-control-description"><?php echo esc_html($this->description); ?></span>
+  <?php endif; ?>
+</label>
 
-            <div class="email-repeater-list">
-                <?php foreach ($values as $index => $email) : ?>
-                    <div class="email-repeater-item" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-                        <input type="email" placeholder="Email адрес" value="<?php echo esc_attr($email['email']); ?>" class="email-address" style="width: 100%; margin-bottom: 5px;" />
-                        <button type="button" class="button remove-email" style="color: #a00;">Удалить</button>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+<div class="email-repeater-list">
+  <?php foreach ($values as $index => $email) : ?>
+  <div class="email-repeater-item"
+    style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+    <input type="email" placeholder="Email адрес" value="<?php echo esc_attr($email['email']); ?>" class="email-address"
+      style="width: 100%; margin-bottom: 5px;" />
+    <button type="button" class="button remove-email" style="color: #a00;">Удалить</button>
+  </div>
+  <?php endforeach; ?>
+</div>
 
-            <button type="button" class="button add-email" style="margin-top: 10px;">+ Добавить email</button>
+<button type="button" class="button add-email" style="margin-top: 10px;">+ Добавить email</button>
 
-            <input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr($this->value()); ?>" class="email-repeater-value" />
+<input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr($this->value()); ?>"
+  class="email-repeater-value" />
 
-            <script type="text/javascript">
-                jQuery(document).ready(function($) {
-                    var control = $('#customize-control-<?php echo esc_js($this->id); ?>');
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+  var control = $('#customize-control-<?php echo esc_js($this->id); ?>');
 
-                    function updateValue() {
-                        var emails = [];
-                        control.find('.email-repeater-item').each(function() {
-                            var email = $(this).find('.email-address').val();
-                            if (email) {
-                                emails.push({
-                                    email: email
-                                });
-                            }
-                        });
-                        control.find('.email-repeater-value').val(JSON.stringify(emails)).trigger('change');
-                    }
+  function updateValue() {
+    var emails = [];
+    control.find('.email-repeater-item').each(function() {
+      var email = $(this).find('.email-address').val();
+      if (email) {
+        emails.push({
+          email: email
+        });
+      }
+    });
+    control.find('.email-repeater-value').val(JSON.stringify(emails)).trigger('change');
+  }
 
-                    control.on('click', '.add-email', function() {
-                        var template = '<div class="email-repeater-item" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">' +
-                            '<input type="email" placeholder="Email адрес" class="email-address" style="width: 100%; margin-bottom: 5px;" />' +
-                            '<button type="button" class="button remove-email" style="color: #a00;">Удалить</button>' +
-                            '</div>';
-                        control.find('.email-repeater-list').append(template);
-                    });
+  control.on('click', '.add-email', function() {
+    var template =
+      '<div class="email-repeater-item" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">' +
+      '<input type="email" placeholder="Email адрес" class="email-address" style="width: 100%; margin-bottom: 5px;" />' +
+      '<button type="button" class="button remove-email" style="color: #a00;">Удалить</button>' +
+      '</div>';
+    control.find('.email-repeater-list').append(template);
+  });
 
-                    control.on('click', '.remove-email', function() {
-                        $(this).closest('.email-repeater-item').remove();
-                        updateValue();
-                    });
+  control.on('click', '.remove-email', function() {
+    $(this).closest('.email-repeater-item').remove();
+    updateValue();
+  });
 
-                    control.on('input', '.email-address', function() {
-                        updateValue();
-                    });
-                });
-            </script>
-        <?php
+  control.on('input', '.email-address', function() {
+    updateValue();
+  });
+});
+</script>
+<?php
         }
     }
 
@@ -880,189 +909,196 @@ if (class_exists('WP_Customize_Control')) {
             }
             $control_id = esc_js($this->id);
         ?>
-            <label>
-                <span class="customize-control-title"><?php echo esc_html($this->label); ?></span>
-                <?php if (!empty($this->description)) : ?>
-                    <span class="description customize-control-description"><?php echo esc_html($this->description); ?></span>
-                <?php endif; ?>
-            </label>
+<label>
+  <span class="customize-control-title"><?php echo esc_html($this->label); ?></span>
+  <?php if (!empty($this->description)) : ?>
+  <span class="description customize-control-description"><?php echo esc_html($this->description); ?></span>
+  <?php endif; ?>
+</label>
 
-            <div class="license-repeater-list" id="license-repeater-list-<?php echo $control_id; ?>">
-                <?php foreach ($values as $index => $item) : ?>
-                    <div class="license-repeater-item" style="margin-bottom: 15px; padding: 12px; border: 1px solid #ddd; border-radius: 4px; background: #fafafa;">
+<div class="license-repeater-list" id="license-repeater-list-<?php echo $control_id; ?>">
+  <?php foreach ($values as $index => $item) : ?>
+  <div class="license-repeater-item"
+    style="margin-bottom: 15px; padding: 12px; border: 1px solid #ddd; border-radius: 4px; background: #fafafa;">
 
-                        <!-- Название -->
-                        <p style="margin: 0 0 8px;"><strong>Лицензия <?php echo $index + 1; ?></strong></p>
-                        <input type="text"
-                            placeholder="Название (напр: Свидетельство СРО)"
-                            value="<?php echo esc_attr($item['title'] ?? ''); ?>"
-                            class="license-title widefat"
-                            style="margin-bottom: 8px;">
+    <!-- Название -->
+    <p style="margin: 0 0 8px;"><strong>Лицензия <?php echo $index + 1; ?></strong></p>
+    <input type="text" placeholder="Название (напр: Свидетельство СРО)"
+      value="<?php echo esc_attr($item['title'] ?? ''); ?>" class="license-title widefat" style="margin-bottom: 8px;">
 
-                        <!-- Картинка-превью -->
-                        <p style="margin: 0 0 4px; font-size: 12px; color: #555;">Картинка-превью:</p>
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                            <div class="license-img-preview" style="width: 60px; height: 60px; border: 1px solid #ddd; background: #eee; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;">
-                                <?php if (!empty($item['img_url'])) : ?>
-                                    <img src="<?php echo esc_attr($item['img_url']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
-                                <?php else : ?>
-                                    <span style="font-size: 10px; color: #999;">нет</span>
-                                <?php endif; ?>
-                            </div>
-                            <div>
-                                <input type="hidden" class="license-img-url" value="<?php echo esc_attr($item['img_url'] ?? ''); ?>">
-                                <button type="button" class="button license-upload-img" style="display: block; margin-bottom: 4px;">Выбрать картинку</button>
-                                <button type="button" class="button license-remove-img" style="display: block; color: #a00; <?php echo empty($item['img_url']) ? 'display:none!important;' : ''; ?>">Удалить</button>
-                            </div>
-                        </div>
+    <!-- Картинка-превью -->
+    <p style="margin: 0 0 4px; font-size: 12px; color: #555;">Картинка-превью:</p>
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+      <div class="license-img-preview"
+        style="width: 60px; height: 60px; border: 1px solid #ddd; background: #eee; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;">
+        <?php if (!empty($item['img_url'])) : ?>
+        <img src="<?php echo esc_attr($item['img_url']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+        <?php else : ?>
+        <span style="font-size: 10px; color: #999;">нет</span>
+        <?php endif; ?>
+      </div>
+      <div>
+        <input type="hidden" class="license-img-url" value="<?php echo esc_attr($item['img_url'] ?? ''); ?>">
+        <button type="button" class="button license-upload-img" style="display: block; margin-bottom: 4px;">Выбрать
+          картинку</button>
+        <button type="button" class="button license-remove-img"
+          style="display: block; color: #a00; <?php echo empty($item['img_url']) ? 'display:none!important;' : ''; ?>">Удалить</button>
+      </div>
+    </div>
 
-                        <!-- PDF -->
-                        <p style="margin: 0 0 4px; font-size: 12px; color: #555;">PDF файл (необязательно):</p>
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                            <input type="hidden" class="license-pdf-url" value="<?php echo esc_attr($item['pdf_url'] ?? ''); ?>">
-                            <span class="license-pdf-name" style="font-size: 12px; color: #333; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                <?php echo !empty($item['pdf_url']) ? basename($item['pdf_url']) : '—'; ?>
-                            </span>
-                            <button type="button" class="button license-upload-pdf">Выбрать PDF</button>
-                            <button type="button" class="button license-remove-pdf" style="color: #a00; <?php echo empty($item['pdf_url']) ? 'display:none;' : ''; ?>">✕</button>
-                        </div>
+    <!-- PDF -->
+    <p style="margin: 0 0 4px; font-size: 12px; color: #555;">PDF файл (необязательно):</p>
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+      <input type="hidden" class="license-pdf-url" value="<?php echo esc_attr($item['pdf_url'] ?? ''); ?>">
+      <span class="license-pdf-name"
+        style="font-size: 12px; color: #333; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+        <?php echo !empty($item['pdf_url']) ? basename($item['pdf_url']) : '—'; ?>
+      </span>
+      <button type="button" class="button license-upload-pdf">Выбрать PDF</button>
+      <button type="button" class="button license-remove-pdf"
+        style="color: #a00; <?php echo empty($item['pdf_url']) ? 'display:none;' : ''; ?>">✕</button>
+    </div>
 
-                        <button type="button" class="button license-remove-item" style="color: #a00;">Удалить лицензию</button>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+    <button type="button" class="button license-remove-item" style="color: #a00;">Удалить лицензию</button>
+  </div>
+  <?php endforeach; ?>
+</div>
 
-            <button type="button" class="button button-primary license-add-item" style="margin-top: 10px;">+ Добавить лицензию</button>
-            <input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr($this->value()); ?>" class="license-repeater-value">
+<button type="button" class="button button-primary license-add-item" style="margin-top: 10px;">+ Добавить
+  лицензию</button>
+<input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr($this->value()); ?>"
+  class="license-repeater-value">
 
-            <script type="text/javascript">
-                (function($) {
-                    var listId = 'license-repeater-list-<?php echo $control_id; ?>';
-                    var $control = $('#customize-control-<?php echo $control_id; ?>');
-                    var $list = $('#' + listId);
+<script type="text/javascript">
+(function($) {
+  var listId = 'license-repeater-list-<?php echo $control_id; ?>';
+  var $control = $('#customize-control-<?php echo $control_id; ?>');
+  var $list = $('#' + listId);
 
-                    // ── Сохранить значение ────────────────────────────────
-                    function updateValue() {
-                        var licenses = [];
-                        $list.find('.license-repeater-item').each(function() {
-                            licenses.push({
-                                title: $(this).find('.license-title').val(),
-                                img_url: $(this).find('.license-img-url').val(),
-                                pdf_url: $(this).find('.license-pdf-url').val(),
-                            });
-                        });
-                        $control.find('.license-repeater-value').val(JSON.stringify(licenses)).trigger('change');
-                    }
+  // ── Сохранить значение ────────────────────────────────
+  function updateValue() {
+    var licenses = [];
+    $list.find('.license-repeater-item').each(function() {
+      licenses.push({
+        title: $(this).find('.license-title').val(),
+        img_url: $(this).find('.license-img-url').val(),
+        pdf_url: $(this).find('.license-pdf-url').val(),
+      });
+    });
+    $control.find('.license-repeater-value').val(JSON.stringify(licenses)).trigger('change');
+  }
 
-                    // ── Открыть медиазагрузчик ────────────────────────────
-                    function openMediaUploader(options, callback) {
-                        var frame = wp.media({
-                            title: options.title || 'Выбрать файл',
-                            button: {
-                                text: options.button || 'Выбрать'
-                            },
-                            library: {
-                                type: options.type || 'image'
-                            },
-                            multiple: false,
-                        });
-                        frame.on('select', function() {
-                            var attachment = frame.state().get('selection').first().toJSON();
-                            callback(attachment);
-                        });
-                        frame.open();
-                    }
+  // ── Открыть медиазагрузчик ────────────────────────────
+  function openMediaUploader(options, callback) {
+    var frame = wp.media({
+      title: options.title || 'Выбрать файл',
+      button: {
+        text: options.button || 'Выбрать'
+      },
+      library: {
+        type: options.type || 'image'
+      },
+      multiple: false,
+    });
+    frame.on('select', function() {
+      var attachment = frame.state().get('selection').first().toJSON();
+      callback(attachment);
+    });
+    frame.open();
+  }
 
-                    // ── Добавить картинку ─────────────────────────────────
-                    $list.on('click', '.license-upload-img', function() {
-                        var $item = $(this).closest('.license-repeater-item');
-                        openMediaUploader({
-                            title: 'Выбрать картинку',
-                            button: 'Использовать',
-                            type: 'image'
-                        }, function(att) {
-                            $item.find('.license-img-url').val(att.url);
-                            $item.find('.license-img-preview').html('<img src="' + att.url + '" style="width:100%;height:100%;object-fit:cover;">');
-                            $item.find('.license-remove-img').show();
-                            updateValue();
-                        });
-                    });
+  // ── Добавить картинку ─────────────────────────────────
+  $list.on('click', '.license-upload-img', function() {
+    var $item = $(this).closest('.license-repeater-item');
+    openMediaUploader({
+      title: 'Выбрать картинку',
+      button: 'Использовать',
+      type: 'image'
+    }, function(att) {
+      $item.find('.license-img-url').val(att.url);
+      $item.find('.license-img-preview').html('<img src="' + att.url +
+        '" style="width:100%;height:100%;object-fit:cover;">');
+      $item.find('.license-remove-img').show();
+      updateValue();
+    });
+  });
 
-                    // ── Удалить картинку ──────────────────────────────────
-                    $list.on('click', '.license-remove-img', function() {
-                        var $item = $(this).closest('.license-repeater-item');
-                        $item.find('.license-img-url').val('');
-                        $item.find('.license-img-preview').html('<span style="font-size:10px;color:#999;">нет</span>');
-                        $(this).hide();
-                        updateValue();
-                    });
+  // ── Удалить картинку ──────────────────────────────────
+  $list.on('click', '.license-remove-img', function() {
+    var $item = $(this).closest('.license-repeater-item');
+    $item.find('.license-img-url').val('');
+    $item.find('.license-img-preview').html('<span style="font-size:10px;color:#999;">нет</span>');
+    $(this).hide();
+    updateValue();
+  });
 
-                    // ── Добавить PDF ──────────────────────────────────────
-                    $list.on('click', '.license-upload-pdf', function() {
-                        var $item = $(this).closest('.license-repeater-item');
-                        openMediaUploader({
-                            title: 'Выбрать PDF',
-                            button: 'Использовать',
-                            type: 'application/pdf'
-                        }, function(att) {
-                            $item.find('.license-pdf-url').val(att.url);
-                            $item.find('.license-pdf-name').text(att.filename || att.url.split('/').pop());
-                            $item.find('.license-remove-pdf').show();
-                            updateValue();
-                        });
-                    });
+  // ── Добавить PDF ──────────────────────────────────────
+  $list.on('click', '.license-upload-pdf', function() {
+    var $item = $(this).closest('.license-repeater-item');
+    openMediaUploader({
+      title: 'Выбрать PDF',
+      button: 'Использовать',
+      type: 'application/pdf'
+    }, function(att) {
+      $item.find('.license-pdf-url').val(att.url);
+      $item.find('.license-pdf-name').text(att.filename || att.url.split('/').pop());
+      $item.find('.license-remove-pdf').show();
+      updateValue();
+    });
+  });
 
-                    // ── Удалить PDF ───────────────────────────────────────
-                    $list.on('click', '.license-remove-pdf', function() {
-                        var $item = $(this).closest('.license-repeater-item');
-                        $item.find('.license-pdf-url').val('');
-                        $item.find('.license-pdf-name').text('—');
-                        $(this).hide();
-                        updateValue();
-                    });
+  // ── Удалить PDF ───────────────────────────────────────
+  $list.on('click', '.license-remove-pdf', function() {
+    var $item = $(this).closest('.license-repeater-item');
+    $item.find('.license-pdf-url').val('');
+    $item.find('.license-pdf-name').text('—');
+    $(this).hide();
+    updateValue();
+  });
 
-                    // ── Добавить новую лицензию ───────────────────────────
-                    $control.on('click', '.license-add-item', function() {
-                        var count = $list.find('.license-repeater-item').length + 1;
-                        var $item = $('<div class="license-repeater-item" style="margin-bottom:15px;padding:12px;border:1px solid #ddd;border-radius:4px;background:#fafafa;">' +
-                            '<p style="margin:0 0 8px;"><strong>Лицензия ' + count + '</strong></p>' +
-                            '<input type="text" placeholder="Название (напр: Свидетельство СРО)" class="license-title widefat" style="margin-bottom:8px;">' +
-                            '<p style="margin:0 0 4px;font-size:12px;color:#555;">Картинка-превью:</p>' +
-                            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
-                            '<div class="license-img-preview" style="width:60px;height:60px;border:1px solid #ddd;background:#eee;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">' +
-                            '<span style="font-size:10px;color:#999;">нет</span>' +
-                            '</div>' +
-                            '<div>' +
-                            '<input type="hidden" class="license-img-url" value="">' +
-                            '<button type="button" class="button license-upload-img" style="display:block;margin-bottom:4px;">Выбрать картинку</button>' +
-                            '<button type="button" class="button license-remove-img" style="display:none;color:#a00;">Удалить</button>' +
-                            '</div>' +
-                            '</div>' +
-                            '<p style="margin:0 0 4px;font-size:12px;color:#555;">PDF файл (необязательно):</p>' +
-                            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
-                            '<input type="hidden" class="license-pdf-url" value="">' +
-                            '<span class="license-pdf-name" style="font-size:12px;color:#333;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">—</span>' +
-                            '<button type="button" class="button license-upload-pdf">Выбрать PDF</button>' +
-                            '<button type="button" class="button license-remove-pdf" style="display:none;color:#a00;">✕</button>' +
-                            '</div>' +
-                            '<button type="button" class="button license-remove-item" style="color:#a00;">Удалить лицензию</button>' +
-                            '</div>');
-                        $list.append($item);
-                    });
+  // ── Добавить новую лицензию ───────────────────────────
+  $control.on('click', '.license-add-item', function() {
+    var count = $list.find('.license-repeater-item').length + 1;
+    var $item = $(
+      '<div class="license-repeater-item" style="margin-bottom:15px;padding:12px;border:1px solid #ddd;border-radius:4px;background:#fafafa;">' +
+      '<p style="margin:0 0 8px;"><strong>Лицензия ' + count + '</strong></p>' +
+      '<input type="text" placeholder="Название (напр: Свидетельство СРО)" class="license-title widefat" style="margin-bottom:8px;">' +
+      '<p style="margin:0 0 4px;font-size:12px;color:#555;">Картинка-превью:</p>' +
+      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
+      '<div class="license-img-preview" style="width:60px;height:60px;border:1px solid #ddd;background:#eee;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">' +
+      '<span style="font-size:10px;color:#999;">нет</span>' +
+      '</div>' +
+      '<div>' +
+      '<input type="hidden" class="license-img-url" value="">' +
+      '<button type="button" class="button license-upload-img" style="display:block;margin-bottom:4px;">Выбрать картинку</button>' +
+      '<button type="button" class="button license-remove-img" style="display:none;color:#a00;">Удалить</button>' +
+      '</div>' +
+      '</div>' +
+      '<p style="margin:0 0 4px;font-size:12px;color:#555;">PDF файл (необязательно):</p>' +
+      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">' +
+      '<input type="hidden" class="license-pdf-url" value="">' +
+      '<span class="license-pdf-name" style="font-size:12px;color:#333;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">—</span>' +
+      '<button type="button" class="button license-upload-pdf">Выбрать PDF</button>' +
+      '<button type="button" class="button license-remove-pdf" style="display:none;color:#a00;">✕</button>' +
+      '</div>' +
+      '<button type="button" class="button license-remove-item" style="color:#a00;">Удалить лицензию</button>' +
+      '</div>');
+    $list.append($item);
+  });
 
-                    // ── Удалить лицензию ──────────────────────────────────
-                    $list.on('click', '.license-remove-item', function() {
-                        $(this).closest('.license-repeater-item').remove();
-                        updateValue();
-                    });
+  // ── Удалить лицензию ──────────────────────────────────
+  $list.on('click', '.license-remove-item', function() {
+    $(this).closest('.license-repeater-item').remove();
+    updateValue();
+  });
 
-                    // ── Обновить при изменении названия ──────────────────
-                    $list.on('input', '.license-title', function() {
-                        updateValue();
-                    });
+  // ── Обновить при изменении названия ──────────────────
+  $list.on('input', '.license-title', function() {
+    updateValue();
+  });
 
-                })(jQuery);
-            </script>
+})(jQuery);
+</script>
 <?php
         }
     }
@@ -1206,6 +1242,14 @@ function mytheme_get_max()
 function mytheme_get_instagram()
 {
     return get_theme_mod('mytheme_instagram', '');
+}
+
+/**
+ * Получить ссылку на Viber
+ */
+function mytheme_get_viber()
+{
+    return get_theme_mod('mytheme_viber', '');
 }
 
 
