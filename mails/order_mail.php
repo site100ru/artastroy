@@ -27,7 +27,7 @@ if ( ! $_POST ) {
 
 // ─── Email получателей из Customizer ─────────────────────────────
 $from_domain = $_SERVER['HTTP_HOST'] ?? parse_url( home_url(), PHP_URL_HOST );
-$subject     = 'Заявка на обратный звонок с сайта ' . $from_domain;
+$subject     = 'Заявка на обратный звонок с сайта артастрой.рф';
 
 // Дополнительные email из повторителя
 $emails_extra = [];

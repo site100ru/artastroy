@@ -141,4 +141,4 @@ function modalClose() {
     document.getElementById('background-msg').style.display = 'none';
     document.getElementById('message').style.display = 'none';
     document.getElementById('btn-close').style.display = 'none';
-}new.js
+}
