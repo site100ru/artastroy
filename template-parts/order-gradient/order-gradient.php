@@ -16,7 +16,7 @@
 
 $title       = $args['title']       ?? 'Остались вопросы?';
 $description = $args['description'] ?? 'Оставьте Ваши контакты и мы перезвоним Вам в течение 10 минут или напишите нам в мессенджер и мы подробно ответим на Ваши вопросы.';
-$action      = $args['action']      ?? 'mails/order_mail.php';
+$action      = $args['action']      ?? get_template_directory_uri() . '/mails/order_mail.php';
 $button_text = $args['button_text'] ?? 'Оставить заявку';
 
 // Соцсети из Customizer
