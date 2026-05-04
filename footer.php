@@ -302,6 +302,10 @@ foreach ($extra_phones as $p) {
 </div>
 
 
+<?php if ($counter_body = get_theme_mod('mytheme_counter_body')): ?>
+<!-- Код счетчика (body) -->
+<?php echo $counter_body; ?>
+<?php endif; ?>
 
 <?php wp_footer(); ?>
 
