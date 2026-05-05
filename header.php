@@ -39,7 +39,7 @@ if (isset($_SESSION['win'])) {
     $main_phone_link = mytheme_get_phone_link('main');
     $add_phone       = mytheme_get_phone('additional');
     $add_phone_link  = mytheme_get_phone_link('additional');
-    $extra_phones    = mytheme_get_phones_extra(); // [{display, link}, ...]
+    $extra_phones    = mytheme_get_phones_extra(); 
     $email           = mytheme_get_email();
     $address         = mytheme_get_address();
     $job_time        = mytheme_get_job_time();
@@ -95,7 +95,7 @@ if (isset($_SESSION['win'])) {
             <?php endif; ?>
 
             <?php if ($email) : ?>
-            <li class="nav-item me-1 me-xxl-4">
+            <li class="nav-item me-1 me-xxl-3">
               <a class="nav-link" href="mailto:<?php echo esc_attr($email); ?>">
                 <div class="d-flex align-items-center gap-2">
                   <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/email-ico.svg" alt=""
@@ -106,8 +106,10 @@ if (isset($_SESSION['win'])) {
             </li>
             <?php endif; ?>
 
-            <?php foreach ($all_phones as $phone) : ?>
-            <li class="nav-item me-1 me-xxl-4">
+            <!-- решение не универсальное, только для данного сайта -->
+            <?php $phones_count = count($all_phones); ?>
+            <?php foreach ($all_phones as $index => $phone) : ?>
+            <li class="nav-item me-1 me-xxl-3<?php echo ($index === $phones_count - 1) ? ' d-none d-xl-flex' : ''; ?>">
               <a class="top-menu-tel nav-link" href="tel:<?php echo esc_attr($phone['link']); ?>">
                 <div class="d-flex align-items-center gap-2">
                   <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/mobile-phone-ico.svg" alt=""
@@ -117,6 +119,15 @@ if (isset($_SESSION['win'])) {
               </a>
             </li>
             <?php endforeach; ?>
+
+            <?php $max = mytheme_get_max(); if ($max) : ?>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo esc_url($max); ?>" target="_blank" rel="noopener">
+                <img src="<?php echo esc_url(get_template_directory_uri()); ?>/img/ico/max-icon.svg" alt="MAX"
+                  class="mobile-ico">
+              </a>
+            </li>
+            <?php endif; ?>
 
           </ul>
         </div>
@@ -147,16 +158,16 @@ if (isset($_SESSION['win'])) {
         <!-- Меню -->
         <div class="collapse navbar-collapse" id="mobail-header-collapse">
           <?php
-                    wp_nav_menu([
-                        'theme_location' => 'main-menu',
-                        'container'      => false,
-                        'menu_id'        => 'menu-main-menu',
-                        'menu_class'     => 'navbar-nav align-items-lg-center ms-auto mb-2 mb-lg-0',
-                        'walker'         => new bootstrap_5_wp_nav_menu_walker(),
-                        'fallback_cb'    => false,
-                        'after'          => '', // точки добавляет walker
-                    ]);
-                    ?>
+            wp_nav_menu([
+                'theme_location' => 'main-menu',
+                'container'      => false,
+                'menu_id'        => 'menu-main-menu',
+                'menu_class'     => 'navbar-nav align-items-lg-center ms-auto mb-2 mb-lg-0',
+                'walker'         => new bootstrap_5_wp_nav_menu_walker(),
+                'fallback_cb'    => false,
+                'after'          => '', // точки добавляет walker
+            ]);
+          ?>
 
           <!-- Мобильный блок контактов (виден только на мобилке внутри бургера) -->
           <div class="nav-item d-lg-none py-2 mt-2">
