@@ -22,6 +22,15 @@ if (isset($_SESSION['win'])) {
   <link href="<?php echo get_template_directory_uri(); ?>/css/theme.css" rel="stylesheet">
   <link href="<?php echo get_template_directory_uri(); ?>/css/new.css" rel="stylesheet">
 
+  <link rel="icon" type="image/png" sizes="96x96"
+    href="<?php echo get_template_directory_uri(); ?>/img/favicon/favicon-96x96.png" />
+  <link rel="icon" type="image/svg+xml" href="<?php echo get_template_directory_uri(); ?>/img/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180"
+    href="<?php echo get_template_directory_uri(); ?>/img/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Artastroy" />
+  <link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/img/favicon/site.webmanifest" />
+
   <?php if ( $counter_head = get_theme_mod( 'mytheme_counter_head' ) ) : ?>
   <!-- Код счетчика (head) -->
   <?php echo $counter_head; ?>
